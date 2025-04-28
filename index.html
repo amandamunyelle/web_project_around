@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Amanda Lemos" />
+    <meta
+      name="keywords"
+      content="destinos, viagens, Estados Unidos,turismo, viagens pelos EUA"
+    />
+    <meta
+      name="description"
+      content="Descubra os melhores destinos dos Estados Unidos, lugares icônicos."
+    />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Around The US</title>
+  </head>
+
+  <body>
+    <div class="page">
+      <header class="header">
+        <img class="header__logo" src="images/logo.png" alt="logotipo" />
+        <img class="header__line" src="images/line.png" alt="linha" />
+      </header>
+
+      <section class="profile">
+        <div class="profile__info">
+          <img
+            src="images/avatar.png"
+            alt="imagem do perfil"
+            class="profile__avatar"
+          />
+          <div class="profile__info-text">
+            <div class="profile__user">
+              <h1 class="profile__user-name">Amanda Lemos</h1>
+              <button class="profile__edit-button">
+                <img
+                  src="images/edit_button.png"
+                  alt="icone de edição"
+                  class="profile__image-edit-button"
+                />
+              </button>
+            </div>
+            <p class="profile__description">Desenvolvedor de web</p>
+          </div>
+        </div>
+        <button class="profile__add-button"></button>
+      </section>
+
+      <section class="elements">
+        <div class="elements__element">
+          <img
+            src="images/Lake-Tahoe.png"
+            alt="Imagem de Lake Tahoe"
+            class="elements__image"
+          />
+          <div class="elements__info">
+            <p class="elements__text">Lake Tahoe (Califórnia/Nevada)</p>
+            <a href="" class="elements__like"
+              ><img src="images/like.png" alt="imagem de coração"
+            /></a>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            src="images/New-Orleans.png"
+            alt="Imagem de New Orleans"
+            class="elements__image"
+          />
+          <div class="elements__info">
+            <p class="elements__text">New Orleans (Louisiana)</p>
+            <a href="" class="elements__like"
+              ><img src="images/like.png" alt="imagem de coração"
+            /></a>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            src="images/Glacier-National-Park.png"
+            alt="Imagem de Glacier National Park  "
+            class="elements__image"
+          />
+          <div class="elements__info">
+            <p class="elements__text">Glacier National Park (Montana)</p>
+            <a href="" class="elements__like"
+              ><img src="images/like.png" alt="imagem de coração"
+            /></a>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            src="images/Nova-York.png"
+            alt="Imagem de Nova York "
+            class="elements__image"
+          />
+          <div class="elements__info">
+            <p class="elements__text">Nova York (New York City)</p>
+            <a href="" class="elements__like"
+              ><img src="images/like.png" alt="imagem de coração"
+            /></a>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            src="images/Yellowstone.png"
+            alt="Imagem de Yellowstone "
+            class="elements__image"
+          />
+          <div class="elements__info">
+            <p class="elements__text">Yellowstone (Wyoming, Montana, Idaho)</p>
+            <a href="" class="elements__like"
+              ><img src="images/like.png" alt="imagem de coração"
+            /></a>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            src="images/Havaí.png"
+            alt="Imagem de Havaí  "
+            class="elements__image"
+          />
+          <div class="elements__info">
+            <p class="elements__text">Havaí</p>
+            <a href="" class="elements__like"
+              ><img src="images/like.png" alt="imagem de coração"
+            /></a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p class="footer__copyright">© 2025 Around The U.S.</p>
+      </footer>
+
+      <!--POPUP PARA EDITAR PERFIL -->
+      <section class="popup">
+        <div class="popup__container" id="popup-edit-profile">
+          <button type="button" class="popup__close" id="popup-close-btn">
+            <img
+              src="images/close-button.png"
+              alt="fechar icone"
+              class="popup__close-image"
+            />
+          </button>
+          <h2 class="popup__title">Editar perfil</h2>
+          <form class="popup__form" id="popup-form">
+            <input
+              type="text"
+              name="name"
+              placeholder="Nome"
+              class="popup__input"
+              id="popup-name-input"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <span class="popup__form-error" id="name-error"></span>
+
+            <input
+              type="text"
+              name="description"
+              placeholder="Sobre mim"
+              class="popup__input"
+              id="popup-description-input"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <span class="popup__form-error" id="description-error"></span>
+
+            <button type="submit" class="popup__submit">Salvar</button>
+          </form>
+        </div>
+      </section>
+    </div>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>
