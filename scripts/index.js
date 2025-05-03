@@ -7,19 +7,17 @@ const descriptionInput = document.getElementById("popup-description-input");
 const profileName = document.querySelector(".profile__user-name");
 const profileDescription = document.querySelector(".profile__description");
 
-// Abrir popup e preencher campos
 editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
   popup.classList.add("popup_opened");
+  nameInput.focus();
 });
 
-// Fechar popup
 closeButton.addEventListener("click", () => {
   popup.classList.remove("popup_opened");
 });
 
-// Submeter formulário
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   profileName.textContent = nameInput.value;
