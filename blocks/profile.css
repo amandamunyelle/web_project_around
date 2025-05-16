@@ -44,6 +44,7 @@
   line-height: 39px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
