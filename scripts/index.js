@@ -102,8 +102,9 @@ function createCard(name, link) {
   });
 
   // Deletar
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
+  deleteButton.addEventListener("click", (event) => {
+    const card = event.target.closest(".elements__card");
+    card.remove();
   });
 
   // Abrir imagem ampliada
