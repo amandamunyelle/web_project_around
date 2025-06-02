@@ -61,10 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const linkError = document.getElementById("link-error");
   const submitButton = formAddCard.querySelector(".popup__submit");
   const addCardPopup = document.getElementById("popup-add-card");
+  const titleMinLength = 2;
+  const titleMaxLength = 30;
 
   function validateTitle() {
     const value = titleInput.value.trim();
-    if (value.length < 2 || value.length > 30) {
+    if (value.length < titleMinLength || value.length > titleMaxLength) {
       titleInput.setCustomValidity(
         "O título deve conter entre 2 e 30 caracteres."
       );
@@ -76,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function validateLink() {
+    linkInput.setCustomValidity("");
     if (!linkInput.validity.valid) {
       linkInput.setCustomValidity("Por favor, insira uma URL válida.");
       linkError.textContent = linkInput.validationMessage;
     } else {
-      linkInput.setCustomValidity("");
       linkError.textContent = "";
     }
   }
