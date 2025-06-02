@@ -134,3 +134,38 @@ document
   .addEventListener("click", () => {
     document.getElementById("popup-image").classList.remove("popup_opened");
   });
+
+// Seleciona todos os popups da página
+const popups = document.querySelectorAll(".popup");
+
+popups.forEach((popup) => {
+  popup.addEventListener("click", (event) => {
+    // Se o clique foi no overlay (ou seja, no próprio elemento .popup),
+    // e não dentro do conteúdo (.popup__container)
+    if (event.target === popup) {
+      popup.classList.remove("popup_opened");
+    }
+  });
+});
+
+// Fechar pop-ups pressionando a tecla Esc
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    const openedPopup = document.querySelector(".popup.popup_opened");
+    if (openedPopup) {
+      openedPopup.classList.remove("popup_opened");
+    }
+  }
+});
+
+// Habilitando a validação chamando enableValidation()
+// Valide todas as configurações
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+});

@@ -88,6 +88,12 @@
   opacity: 0.8;
 }
 
+.popup__submit:disabled {
+  background-color: #777;
+  cursor: default;
+  opacity: 0.8;
+}
+
 .popup__form-error {
   color: red;
   font-weight: 400;
@@ -146,6 +152,7 @@
 .popup.popup_opened {
   display: flex;
 }
+
 @media screen and (max-width: 320px) {
   .popup__container {
     width: 90%;
