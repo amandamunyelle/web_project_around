@@ -78,9 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function validateLink() {
+    // Limpa a mensagem customizada antes de verificar validade
     linkInput.setCustomValidity("");
+
     if (!linkInput.validity.valid) {
-      linkInput.setCustomValidity("Por favor, insira uma URL válida.");
+      if (linkInput.validity.typeMismatch) {
+        linkInput.setCustomValidity("Por favor, insira uma URL válida.");
+      }
       linkError.textContent = linkInput.validationMessage;
     } else {
       linkError.textContent = "";

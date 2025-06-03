@@ -45,6 +45,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 373px;
 }
 
 .profile__edit-button {
@@ -73,6 +74,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 415px;
 }
 
 .profile__add-button {
@@ -85,14 +87,6 @@
   background-color: black;
   background-size: 22px 22px;
   cursor: pointer;
-}
-
-.profile__user-name,
-.profile__description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 300px;
 }
 
 @media (max-width: 320px) {
@@ -124,6 +118,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    max-width: 224px;
   }
 
   .profile__user-name {
@@ -134,6 +129,7 @@
   .profile__description {
     font-size: 14px;
     line-height: 17px;
+    max-width: 282px;
   }
 
   .profile__edit-button {
@@ -163,11 +159,13 @@
 
   .profile__user-name {
     font-size: 30px;
+    max-width: 250px;
   }
 
   .profile__description {
     font-size: 16px;
     text-align: center;
+    max-width: 280px;
   }
 
   .profile__edit-button {
