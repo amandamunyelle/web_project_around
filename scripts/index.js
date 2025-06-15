@@ -1,171 +1,116 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { initialCards } from "./utils.js";
+
+// Configuração de validação
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__form-error_visible",
+};
+
+// Formulários
+const editForm = document.getElementById("popup-form");
+const addCardForm = document.getElementById("form-add-card");
+
+// Instanciar validadores
+const editFormValidator = new FormValidator(validationConfig, editForm);
+const addCardFormValidator = new FormValidator(validationConfig, addCardForm);
+
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
+// Elementos do perfil
 const editButton = document.querySelector(".profile__edit-button");
-const popup = document.getElementById("popup-edit-profile");
-const closeButton = document.getElementById("popup-close-btn");
-const form = document.getElementById("popup-form");
+const popupEditProfile = document.getElementById("popup-edit-profile");
 const nameInput = document.getElementById("popup-name-input");
 const descriptionInput = document.getElementById("popup-description-input");
 const profileName = document.querySelector(".profile__user-name");
 const profileDescription = document.querySelector(".profile__description");
 
-// Editar profile
+// Abrir popup editar perfil e preencher inputs
 editButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  popup.classList.add("popup_opened");
-  nameInput.focus();
+  popupEditProfile.classList.add("popup_opened");
 });
 
-closeButton.addEventListener("click", () => {
-  popup.classList.remove("popup_opened");
+// Fechar popup editar perfil pelo botão X
+const closeButtonEdit = document.getElementById("popup-close-btn");
+closeButtonEdit.addEventListener("click", () => {
+  popupEditProfile.classList.remove("popup_opened");
 });
 
-form.addEventListener("submit", (e) => {
+// Salvar edição do perfil
+editForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-  popup.classList.remove("popup_opened");
+  popupEditProfile.classList.remove("popup_opened");
 });
 
-const addCardPopup = document.getElementById("popup-add-card");
-const addCardButton = document.querySelector(".profile__add-button");
-const addCardForm = document.getElementById("form-add-card");
+// Adicionar novo cartão
+const cardList = document.querySelector(".elements__cards");
 const inputPlaceName = addCardForm.elements.name;
 const inputPlaceLink = addCardForm.elements.link;
+const addCardButton = document.querySelector(".profile__add-button");
+const addCardPopup = document.getElementById("popup-add-card");
 
-//Abrir popup
+// Função para renderizar cartão
+function renderCard(name, link) {
+  const card = new Card(name, link, "#card-template");
+  const cardElement = card.generateCard();
+  cardList.prepend(cardElement);
+}
+
+// Renderizar cards iniciais
+initialCards.forEach((card) => renderCard(card.name, card.link));
+
+// Abrir popup novo cartão
 addCardButton.addEventListener("click", () => {
   addCardPopup.classList.add("popup_opened");
 });
 
-//Fechar popup
-addCardPopup.querySelector(".popup__close").addEventListener("click", () => {
-  addCardPopup.classList.remove("popup_opened");
-});
-
-//Adicionar novo cartão
+// Enviar formulário para adicionar cartão
 addCardForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const name = inputPlaceName.value;
-  const link = inputPlaceLink.value;
-  const newCard = createCard(name, link);
-  cardList.prepend(newCard);
-  addCardPopup.classList.remove("popup_opened");
+  renderCard(inputPlaceName.value, inputPlaceLink.value);
   addCardForm.reset();
+  addCardPopup.classList.remove("popup_opened");
 });
 
-// Elementos iniciais
+// Popup da imagem ampliada
+const popupImage = document.getElementById("popup-image");
+const popupImageCloseBtn = document.querySelector(".popup-image__close-button");
 
-const initialCards = [
-  {
-    name: "Vale de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-  },
-  {
-    name: "Montanhas Carecas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
-  },
-  {
-    name: "Parque Nacional da Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
-  },
-];
-
-const cardList = document.querySelector(".elements__cards");
-const cardTemplate = document.querySelector("#card-template").content;
-
-function createCard(name, link) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const imageElement = cardElement.querySelector(".elements__image");
-  const titleElement = cardElement.querySelector(".elements__text");
-  const likeButton = cardElement.querySelector(".elements__like");
-  const deleteButton = cardElement.querySelector(".elements__delete");
-
-  imageElement.src = link;
-  imageElement.alt = name;
-  titleElement.textContent = name;
-
-  // Curtir
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("elements__like_active");
-  });
-
-  // Deletar
-  deleteButton.addEventListener("click", (event) => {
-    const card = event.target.closest(".elements__card");
-    card.remove();
-  });
-
-  // Abrir imagem ampliada
-  imageElement.addEventListener("click", () => {
-    const popupImage = document.querySelector(".popup-image__img");
-    const popupCaption = document.querySelector(".popup__caption");
-    const imagePopup = document.getElementById("popup-image");
-
-    popupImage.src = link;
-    popupImage.alt = name;
-    popupCaption.textContent = name;
-    imagePopup.classList.add("popup_opened");
-  });
-
-  return cardElement;
-}
-
-// Renderizar os cartões iniciais
-initialCards.forEach((card) => {
-  const newCard = createCard(card.name, card.link);
-  cardList.append(newCard);
+popupImageCloseBtn.addEventListener("click", () => {
+  popupImage.classList.remove("popup_opened");
 });
 
-/// Fechar imagem ampliada
-document
-  .querySelector(".popup-image__close-button")
-  .addEventListener("click", () => {
-    document.getElementById("popup-image").classList.remove("popup_opened");
-  });
-
-// Seleciona todos os popups da página
-const popups = document.querySelectorAll(".popup");
-
-popups.forEach((popup) => {
-  popup.addEventListener("click", (event) => {
-    // Se o clique foi no overlay (ou seja, no próprio elemento .popup),
-    // e não dentro do conteúdo (.popup__container)
-    if (event.target === popup) {
+// Fechar popups clicando no overlay
+document.querySelectorAll(".popup").forEach((popup) => {
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
       popup.classList.remove("popup_opened");
     }
   });
 });
 
-// Fechar pop-ups pressionando a tecla Esc
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    const openedPopup = document.querySelector(".popup.popup_opened");
-    if (openedPopup) {
-      openedPopup.classList.remove("popup_opened");
-    }
+// Fechar popups com ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    if (openedPopup) openedPopup.classList.remove("popup_opened");
   }
 });
 
-// Habilitando a validação chamando enableValidation()
-// Valide todas as configurações
-
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
+// Fechar todos os popups pelo botão X *
+document.querySelectorAll(".popup__close").forEach((button) => {
+  button.addEventListener("click", () => {
+    const popup = button.closest(".popup");
+    popup.classList.remove("popup_opened");
+  });
 });
