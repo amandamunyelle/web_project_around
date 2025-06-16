@@ -107,7 +107,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Fechar todos os popups pelo botão X *
+// Fechar todos os popups pelo botão X
 document.querySelectorAll(".popup__close").forEach((button) => {
   button.addEventListener("click", () => {
     const popup = button.closest(".popup");
